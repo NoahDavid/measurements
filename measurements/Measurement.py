@@ -3,8 +3,12 @@ from decimal import Decimal, DecimalTuple
 
 class Measurement:
     def __init__(self, val, unc):
-        self.val = val
-        self.unc = unc
+        if type(val) == Decimal and type(unc) == Decimal:
+            self.val = val
+            self.unc = unc
+        else:
+            self.val = Decimal(val)
+            self.unc = Decimal(unc)
 
     def in_range(self, num):
         return self.val + self.unc > num and self.val + self.unc < num
