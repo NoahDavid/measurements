@@ -31,7 +31,7 @@ class Measurement:
         else:
             return obj
     
-    def round_unc(self, places):
+    def round_unc(self):
         rounded = self._round_result(self)
         self.unc = rounded.unc
         self.val = rounded.val
