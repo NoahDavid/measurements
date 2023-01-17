@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='measurements',
-    version='0.1.1',    
+    version='0.1.2',    
     description='A package that provides a simple error propagation class',
     url='https://github.com/NoahDavid/measurements',
     author='Noah Koliadko',
