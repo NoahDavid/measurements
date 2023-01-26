@@ -36,6 +36,14 @@ class Measurement:
         self.unc = rounded.unc
         self.val = rounded.val
 
+    ############################# Analysis #############################
+
+    def within(self, other):
+        if type(other) == Measurement:
+            return abs(self.val - other.val) < self.unc + other.unc
+        else:
+            return abs(self.val - Decimal(other)) < self.unc
+
     ############################# Arithmetic #############################
 
     ### Multiplication ###
