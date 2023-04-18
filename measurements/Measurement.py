@@ -23,7 +23,7 @@ class Measurement:
         if type(obj.val) == Decimal and type(obj.unc) == Decimal:
             # We can round:
             a = obj.unc.as_tuple()
-            a = DecimalTuple(a.sign, (a.digits[0], ), a.exponent + len(a.digits) - 1)
+            a = DecimalTuple(a.sign, a.digits[0:2], a.exponent + len(a.digits) - 1)
             unc = Decimal(a)
             val = round(obj.val, -1 * unc.as_tuple().exponent)
             unc = round(obj.unc, -1 * unc.as_tuple().exponent)
