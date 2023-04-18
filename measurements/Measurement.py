@@ -12,18 +12,18 @@ class Measurement:
     
     ############################# Printing #############################
     
-    def  __str__(self):
-        a = self._round_result(self)
+    def  __str__(self, sigfigs=2):
+        a = self._round_result(self, sigfigs = sigfigs)
         return f'{a.val} ± {a.unc}'
     
-    def __repr__(self):
-        return self.__str__()
+    def __repr__(self, sigfigs=2):
+        return self.__str__(sigfigs = sigfigs)
 
-    def _round_result(self, obj):
+    def _round_result(self, obj, sigfigs=2):
         if type(obj.val) == Decimal and type(obj.unc) == Decimal:
             # We can round:
             a = obj.unc.as_tuple()
-            a = DecimalTuple(a.sign, a.digits[0:2], a.exponent + len(a.digits) - 1)
+            a = DecimalTuple(a.sign, a.digits[0:sigfigs], a.exponent + len(a.digits) - sigfigs)
             unc = Decimal(a)
             val = round(obj.val, -1 * unc.as_tuple().exponent)
             unc = round(obj.unc, -1 * unc.as_tuple().exponent)
@@ -31,8 +31,8 @@ class Measurement:
         else:
             return obj
     
-    def round_unc(self):
-        rounded = self._round_result(self)
+    def round_unc(self, sigfigs=2):
+        rounded = self._round_result(self, sigfigs = sigfigs)
         self.unc = rounded.unc
         self.val = rounded.val
 
